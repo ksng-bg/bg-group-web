@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     "business automation, AI implementation, employee enablement, business transformation, technology consulting",
   generator: "v0.dev",
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
+    icon: [{ url: "/favicon.ico" }, { url: "/favicon.png", type: "image/png" }],
+    shortcut: "/favicon.ico",
     apple: "/favicon.png",
   },
 }
@@ -27,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
