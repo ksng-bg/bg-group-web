@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="text-center space-y-2">
           <p className="text-gray-300">Registered address: Lowry Mill, Swinton, Manchester, M27 6DB</p>
           <p className="text-gray-300">Company number 14176606</p>
-          <p className="text-gray-400 text-sm">© Copyright 2025 Brilly Group UK Limited. All rights reserved.</p>
+          <p className="text-gray-400 text-sm">© Copyright 2025 Brilly Group Limited. All rights reserved.</p>
         </div>
       </div>
     </footer>
