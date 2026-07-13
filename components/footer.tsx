@@ -1,9 +1,16 @@
+import Link from "next/link"
+
 export default function Footer() {
   return (
     <footer className="bg-slate-900 text-white py-8">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-2">
-          <p className="text-gray-300">Registered address: Salford, Manchester, United Kingdom</p>
+          <p className="text-gray-300">
+            <Link href="/careers" className="hover:text-teal-300 transition-colors">
+              Careers
+            </Link>
+          </p>
+          <p className="text-gray-300">Registered address: Sale, Greater Manchester, United Kingdom</p>
           <p className="text-gray-300">Company number 14176606</p>
           <p className="text-gray-400 text-sm">© Copyright 2025 Brilly Group Limited. All rights reserved.</p>
         </div>
