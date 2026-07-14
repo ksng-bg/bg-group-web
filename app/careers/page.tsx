@@ -5,6 +5,9 @@ import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import careers, {
+  HIRING_OPEN,
+  closedNotice,
+  REGISTER_MAILTO,
   APPLY_MAILTO,
   APPLY_EMAIL,
   COMPANIES_HOUSE_URL,
@@ -21,49 +24,164 @@ import {
   Eye,
 } from "lucide-react"
 
-export const metadata: Metadata = {
-  title: "Careers | Field & Market Researcher — Brilly Group (Greater Manchester)",
-  description:
-    "Flexible, self-employed field research work across Greater Manchester with Brilly Group Limited (company no. 14176606), a UK-registered company. Photograph local shops and restaurants, choose your own hours, get paid weekly. No fees, ever.",
+export const metadata: Metadata = HIRING_OPEN
+  ? {
+      title:
+        "Careers | Field & Market Researcher — Brilly Group (Greater Manchester)",
+      description:
+        "Flexible, self-employed field research work across Greater Manchester with Brilly Group Limited (company no. 14176606), a UK-registered company. Photograph local shops and restaurants, choose your own hours, get paid weekly. No fees, ever.",
+    }
+  : {
+      title: "Careers | Brilly Group",
+      description:
+        "Brilly Group Limited (company no. 14176606) is a UK technology and business-services company. We have no open roles right now — register your interest for future opportunities.",
+      // Closed listing: keep the URL live but out of search so it never
+      // resurfaces as an open job.
+      robots: { index: false, follow: true },
+    }
+
+// Shared page header. In the closed state the CTA invites future interest;
+// when hiring re-opens it becomes "Apply now".
+function CareersHeader() {
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="flex-shrink-0" aria-label="Brilly Group home">
+            <Image
+              src="/brilly-group-logo.png"
+              alt="Brilly Group - Tech that Works"
+              width={200}
+              height={67}
+              className="h-10 w-auto"
+              priority
+            />
+          </Link>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Link
+              href="/"
+              className="hidden sm:inline text-gray-700 hover:text-teal-600 font-medium transition-colors"
+            >
+              Main site
+            </Link>
+            <Button
+              asChild
+              className="bg-teal-500 hover:bg-teal-600 text-white font-semibold"
+            >
+              <a href={HIRING_OPEN ? APPLY_MAILTO : REGISTER_MAILTO}>
+                {HIRING_OPEN ? "Apply now" : "Register interest"}
+              </a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </header>
+  )
+}
+
+// Graceful "no open roles" landing — keeps the company-legitimacy content and
+// the URL, and invites future interest (a light talent pool).
+function ClosedCareers() {
+  const { legitimacy } = careers
+  return (
+    <main className="min-h-screen">
+      <CareersHeader />
+
+      {/* Hero */}
+      <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white pt-16">
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="relative container mx-auto px-4 py-24 lg:py-32">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-teal-300 font-semibold tracking-wide uppercase text-sm mb-4">
+              {closedNotice.eyebrow}
+            </p>
+            <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+              {closedNotice.headline}
+            </h1>
+            {closedNotice.body.map((para, i) => (
+              <p
+                key={i}
+                className="text-lg text-blue-100 leading-relaxed mb-4 last:mb-8"
+              >
+                {para}
+              </p>
+            ))}
+            <Button
+              asChild
+              size="lg"
+              className="bg-teal-500 hover:bg-teal-600 text-white px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 transform hover:scale-105"
+            >
+              <a href={REGISTER_MAILTO}>
+                {closedNotice.ctaText}
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            </Button>
+            <p className="text-blue-200 mt-6">
+              {closedNotice.contactName} · {APPLY_EMAIL}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Legitimacy strip — reused; good brand content to keep public */}
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-8 text-center">
+              <ShieldCheck className="w-8 h-8 text-teal-600 shrink-0" />
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+                {legitimacy.heading}
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+              {legitimacy.facts.map((fact) => (
+                <div
+                  key={fact.label}
+                  className="rounded-lg bg-white border border-gray-200 p-4 text-center"
+                >
+                  <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                    {fact.label}
+                  </p>
+                  <p className="text-slate-900 font-semibold leading-snug">
+                    {fact.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="text-center">
+              <Button
+                asChild
+                variant="outline"
+                className="border-teal-600 text-teal-700 hover:bg-teal-50 font-semibold"
+              >
+                <a
+                  href={COMPANIES_HOUSE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {legitimacy.verifyText}
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  )
 }
 
 export default function CareersPage() {
+  if (!HIRING_OPEN) return <ClosedCareers />
+
   const { hero, legitimacy, whatItIs, trust, process, requirements, apply } =
     careers
 
   return (
     <main className="min-h-screen">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex-shrink-0" aria-label="Brilly Group home">
-              <Image
-                src="/brilly-group-logo.png"
-                alt="Brilly Group - Tech that Works"
-                width={200}
-                height={67}
-                className="h-10 w-auto"
-                priority
-              />
-            </Link>
-            <div className="flex items-center gap-2 sm:gap-4">
-              <Link
-                href="/"
-                className="hidden sm:inline text-gray-700 hover:text-teal-600 font-medium transition-colors"
-              >
-                Main site
-              </Link>
-              <Button
-                asChild
-                className="bg-teal-500 hover:bg-teal-600 text-white font-semibold"
-              >
-                <a href={APPLY_MAILTO}>Apply now</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <CareersHeader />
 
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white pt-16">

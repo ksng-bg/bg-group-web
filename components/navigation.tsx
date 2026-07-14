@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
@@ -54,12 +53,6 @@ export default function Navigation() {
                 {item.label}
               </button>
             ))}
-            <Link
-              href="/careers"
-              className="text-gray-700 hover:text-teal-600 font-medium transition-colors duration-200"
-            >
-              Careers
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -83,13 +76,6 @@ export default function Navigation() {
                   {item.label}
                 </button>
               ))}
-              <Link
-                href="/careers"
-                onClick={() => setIsMenuOpen(false)}
-                className="block w-full text-left px-4 py-2 text-gray-700 hover:text-teal-600 hover:bg-gray-50 font-medium transition-colors duration-200"
-              >
-                Careers
-              </Link>
             </div>
           </div>
         )}

@@ -16,6 +16,28 @@ export const APPLY_EMAIL = "job@brillygroup.com"
 export const APPLY_MAILTO =
   "mailto:job@brillygroup.com?subject=More%20info%20%E2%80%94%20Field%20%26%20Market%20Researcher"
 
+// ---------------------------------------------------------------------------
+// HIRING TOGGLE
+// Flip to `true` to re-open the full Field & Market Researcher advert below.
+// While `false`, /careers shows a graceful "no open roles" landing (keeps the
+// URL + company-legitimacy content, invites future interest) and is noindexed.
+// ---------------------------------------------------------------------------
+export const HIRING_OPEN = false
+
+export const REGISTER_MAILTO =
+  "mailto:job@brillygroup.com?subject=Register%20my%20interest%20in%20future%20roles%20at%20Brilly%20Group"
+
+export const closedNotice = {
+  eyebrow: "Careers at Brilly Group",
+  headline: "No open roles right now",
+  body: [
+    "Thanks for your interest in working with Brilly Group. We don't have any active vacancies at the moment.",
+    "We're a growing UK technology and business-services company, and we take on field, operations and technical people from time to time. If you'd like to be considered when something opens up, send us a short note and we'll keep you in mind.",
+  ],
+  ctaText: "Register your interest",
+  contactName: "Recruitment Team, Brilly Group",
+}
+
 export interface FaqItem {
   question: string
   answer: string
